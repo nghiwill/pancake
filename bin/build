@@ -40,6 +40,9 @@ function build_pancake {
   ln -nfs ../vault $shome/.macports/
   ln -nfs ../vault $shome/.ubuntu/
 
+  source $shome/.macports/.profile
+  source $shome/.ubuntu/.profile
+
   cd $shome/.macports
   ln -nfs vault/macports/software_zendesk software
   bin/setup macports
@@ -47,7 +50,6 @@ function build_pancake {
   bin/build ports
   bin/build ruby
 
-  source $shome/.macports/.profile
 
   cd $shome/.ubuntu
   bin/bundler
