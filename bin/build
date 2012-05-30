@@ -54,8 +54,11 @@ function build_pancake {
   cd $shome/.ubuntu
   bin/bundler
   bundle exec vagrant box add destructuring boxes/destructuring.box || true # TODO
-  bin/instance dev1 destructuring
-  bin/instance dev2 destructuring
+  bin/instance --ip 192.168.88.101 dev1 destructuring
+  bin/instance --ip 192.168.88.102 dev2 destructuring
+  bin/instance --ip 192.168.88.103 dev3 destructuring
+  bin/instance --ip 192.168.88.104 dev4 destructuring
+  bin/instance --ip 192.168.88.105 dev5 destructuring
 }
 
 # build the site with jekyll
