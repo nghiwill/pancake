@@ -1,2 +1,9 @@
 /vault
 /site/_site
+/.bash_history
+/.bundle/
+/.gem/
+/.rvm/
+/.vagrant.d/
+/Library/
+/VirtualBox VMs/
