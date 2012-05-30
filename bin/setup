@@ -61,12 +61,14 @@ function setup_pancake {
 
   local pth_shared="/Users/$nm_shared"
 
-  osx-useradd $nm_shared 502 # TODO
-  osx-useradd $nm_developer 503 # TODO
+  osx_useradd $nm_shared 502 # TODO
+  osx_useradd $nm_developer 503 # TODO
 
-  sudo git clone --recurse-submodules https://github.com/HeSYINUvSBZfxqA/pancake $pth_shared
+  if [[ ! -d $pth_shared/.git ]]; then
+    sudo git clone --recurse-submodules https://github.com/HeSYINUvSBZfxqA/pancake $pth_shared
+  fi
   sudo ln -nfs $pth_shared/.macports /opt
-  sudo rsync -ia vault/. $pth_shared/vault/
+  sudo rsync -ia --no-group --no-owner vault/. $pth_shared/vault/
   sudo chown -R $nm_shared:staff $pth_shared # TODO
 }
 
