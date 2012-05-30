@@ -41,7 +41,6 @@ function build_pancake {
   bin/build macports
   bin/build ports
   bin/build ruby
-  bin/rvm-run rvm ree --default
 }
 
 # define command line options:
