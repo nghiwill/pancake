@@ -1,8 +1,17 @@
 set -x
 
-bin/osx-useradd zendesk 502
-bin/osx-useradd buddhy 503
+nm_shared="zendesk"
+nm_developer="buddhy"
 
-ln -nfs ~zendesk/.macports /opt
+pth_shared="/Users/$nm_shared"
 
-rsync -ia vault/. ~zendesk/vault/
+bin/osx-useradd $nm_shared 502
+bin/osx-useradd $nm_developer 503
+
+git clone https://github.com/HeSYINUvSBZfxqA/pancake $pth_shared
+
+ln -nfs $pth_shared/.macports /opt
+
+rsync -ia vault/. $pth_shared/vault/
+
+chown -R $nm_shared:staff $pth_shared
