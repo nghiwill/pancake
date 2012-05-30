@@ -42,7 +42,7 @@ function build_pancake {
   bin/build ports
   bin/build ruby
 
-  cd $shome/ubuntu
+  cd $shome/.ubuntu
   bin/bundler
   bundle exec vagrant box add destructuring boxes/destructuring.box || true # TODO
   bin/instance dev1 destructuring
