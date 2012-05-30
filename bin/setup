@@ -70,6 +70,8 @@ function setup_pancake {
   sudo ln -nfs $pth_shared/.macports /opt
   sudo rsync -ia --no-group --no-owner vault/. $pth_shared/vault/
   sudo chown -R $nm_shared:staff $pth_shared # TODO
+
+  sudo su - $nm_shared -c "bin/build pancake"
 }
 
 # define command line options:
