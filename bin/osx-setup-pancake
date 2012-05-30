@@ -1,0 +1,8 @@
+set -x
+
+bin/osx-useradd zendesk 502
+bin/osx-useradd buddhy 503
+
+ln -nfs ~zendesk/.macports /opt
+
+rsync -ia vault/. ~zendesk/vault/
