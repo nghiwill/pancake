@@ -4,7 +4,7 @@
 #/     setup -- one time setup for pancake
 #/
 #/ SYNOPSIS
-#/     setup pancake
+#/     setup pancake [shared_user] [developer_user]
 
 # figure out the project root under which bin, lib live
 shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
