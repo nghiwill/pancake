@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #/ NAME
-#/     build -- builds pancake
+#/     build -- builds pancake components: macports, ubuntu
 #/           -- builds static site using jekyll
 #/
 #/ SYNOPSIS
-#/     build pancake
+#/     build macports|ubuntu
 #/     build site
 
 # figure out the project root under which bin, lib live
@@ -23,8 +23,11 @@ function main {
 
   local nm_component="$1"; shift
   case "$nm_component" in 
-    pancake)
-      build_pancake "$@"
+    macports)
+      build_macports "$@"
+      ;;
+    ubuntu)
+      build_ubuntu "$@"
       ;;
     site)
       build_jekyll "$@"
@@ -36,17 +39,18 @@ function main {
   esac
 }
 
-function build_pancake {
+function build_macports {
   ln -nfs ../vault $shome/.macports/
-  ln -nfs ../vault $shome/.ubuntu/
 
   cd $shome/.macports
   bin/setup macports
   bin/build macports
   bin/build ports
   bin/build ruby
+}
 
-  # TODO ensure rvm ree is selected
+function build_ubuntu {
+  ln -nfs ../vault $shome/.ubuntu/
 
   cd $shome/.ubuntu
   bin/bundler
