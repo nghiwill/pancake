@@ -47,8 +47,7 @@ function build_pancake {
   bin/build ports
   bin/build ruby
 
-  cd $shome
-  source .bash_profile
+  # TODO ensure rvm ree is selected
 
   cd $shome/.ubuntu
   bin/bundler
