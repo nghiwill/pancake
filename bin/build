@@ -2,9 +2,11 @@
 
 #/ NAME
 #/     build -- builds pancake
+#/           -- builds static site using jekyll
 #/
 #/ SYNOPSIS
 #/     build pancake
+#/     build site
 
 # figure out the project root under which bin, lib live
 shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
@@ -23,6 +25,9 @@ function main {
   case "$nm_component" in 
     pancake)
       build_pancake "$@"
+      ;;
+    site)
+      build_jekyll "$@"
       ;;
     *)
       logger_fatal "don't know how to build ${nm_component}"
@@ -47,6 +52,15 @@ function build_pancake {
   bundle exec vagrant box add destructuring boxes/destructuring.box || true # TODO
   bin/instance dev1 destructuring
   bin/instance dev2 destructuring
+}
+
+# build the site with jekyll
+function build_jekyll {
+  export BUNDLE_GEMFILE="$shome/.doc/Gemfile"
+
+  cd $shome/site
+  bundle check 2>&1 >/dev/null || { bundle install --quiet --local --path vendor/bundle || bundle check > /dev/null; }
+  bundle exec jekyll
 }
 
 # define command line options:
