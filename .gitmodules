@@ -1,0 +1,9 @@
+[submodule ".cue"]
+	path = .cue
+	url = https://github.com/HeSYINUvSBZfxqA/cue
+[submodule ".rbenv"]
+	path = .rbenv
+	url = https://github.com/HeSYINUvSBZfxqA/rbenv
+[submodule ".junas"]
+	path = .junas
+	url = https://github.com/HeSYINUvSBZfxqA/junas
