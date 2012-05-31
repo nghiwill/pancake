@@ -65,6 +65,9 @@ function setup_pancake {
   sudo rsync -ia --no-group --no-owner --delete vault/. $pth_shared/vault/
   sudo chown -R $nm_shared:staff $pth_shared # TODO
 
+  sudo su - $nm_shared -c "git pull"
+  sudo su - $nm_shared -c "git submodules update --init --recursive"
+
   sudo su - $nm_shared -c "bin/build macports"
   sudo su - $nm_shared -c "source .bash_profile; bin/build ubuntu"
 }
