@@ -59,7 +59,7 @@ function setup_pancake {
   osx_useradd $nm_shared "$FLAGS_userid"
 
   if [[ ! -d $pth_shared/.git ]]; then
-    sudo git clone --recurse-submodules https://github.com/HeSYINUvSBZfxqA/pancake $pth_shared
+    sudo git clone --recurse-submodules "$FLAGS_repo" $pth_shared
   fi
 
   if [[ "$FLAGS_macports" = "$FLAGS_TRUE" ]]; then
@@ -90,6 +90,7 @@ DEFINE_boolean 'macports' "$FLAGS_TRUE" 'install macports packages' 'm'
 DEFINE_boolean 'ubuntu' "$FLAGS_TRUE" 'build ubuntu guests' 'U'
 DEFINE_integer 'userid' "502" 'user id' 'u'
 DEFINE_integer 'groupid' "20" 'group id' 'g'
+DEFINE_string 'repo' "https://github.com/HeSYINUvSBZfxqA/pancake" 'home repo' 'r'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
