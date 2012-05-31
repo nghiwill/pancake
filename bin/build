@@ -49,6 +49,8 @@ function build_macports {
 }
 
 function build_ubuntu {
+  gem install bundler -v 1.1.4
+
   ln -nfs ../vault $shome/.ubuntu/
 
   cd $shome/.ubuntu
