@@ -46,9 +46,6 @@ function build_macports {
   bin/setup macports
   bin/build macports
   bin/build ports
-
-  cd $shome
-  git checkout .bash_profile .bashrc # undo rvm mods
 }
 
 function build_ubuntu {
