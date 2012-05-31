@@ -58,9 +58,12 @@ function build_ubuntu {
   cd $shome/.ubuntu
   bin/bundler
   bundle exec vagrant box add destructuring boxes/destructuring.box || true # TODO
-  bin/instance --ip 192.168.88.101 dev1 destructuring
-  bin/instance --ip 192.168.88.102 dev2 destructuring
-  bin/instance --ip 192.168.88.103 dev3 destructuring
+
+  for a in 1 2 3; do
+    if [[ ! -d vagrant/dev$a ]]; then
+      bin/instance --ip 192.168.88.10$a dev$a destructuring
+    fi
+  done
 }
 
 # build the site with jekyll
