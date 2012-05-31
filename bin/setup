@@ -4,7 +4,7 @@
 #/     setup -- one time setup for pancake
 #/
 #/ SYNOPSIS
-#/     setup pancake [shared_user] [developer_user]
+#/     setup pancake [shared_user]
 
 # figure out the project root under which bin, lib live
 shome="$(cd -P -- "$(dirname -- "$0")/.." && pwd -P)"
@@ -51,18 +51,12 @@ function setup_pancake {
     logger_fatal "missing shared username"
     exit 1
   fi
-  if [[ "$#" < 2 ]]; then
-    logger_fatal "missing developer username"
-    exit 1
-  fi
 
   local nm_shared=$1; shift
-  local nm_developer=$1; shift
 
   local pth_shared="/Users/$nm_shared"
 
   osx_useradd $nm_shared 502 # TODO
-  osx_useradd $nm_developer 503 # TODO
 
   if [[ ! -d $pth_shared/.git ]]; then
     sudo git clone --recurse-submodules https://github.com/HeSYINUvSBZfxqA/pancake $pth_shared
