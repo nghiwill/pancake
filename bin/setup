@@ -41,7 +41,7 @@ function osx_useradd {
   sudo dscl . -create $pth_user
   sudo dscl . -create $pth_user UserShell /bin/bash
   sudo dscl . -create $pth_user UniqueID $id_user
-  sudo dscl . -create $pth_user PrimaryGroupID 20 # staff TODO
+  sudo dscl . -create $pth_user PrimaryGroupID "$FLAGS_groupid"
   sudo dscl . -create $pth_user NFSHomeDirectory $pth_user
   sudo mkdir -p $pth_user
 }
@@ -56,24 +56,33 @@ function setup_pancake {
 
   local pth_shared="/Users/$nm_shared"
 
-  osx_useradd $nm_shared 502 # TODO
+  osx_useradd $nm_shared "$FLAGS_userid"
 
   if [[ ! -d $pth_shared/.git ]]; then
     sudo git clone --recurse-submodules https://github.com/HeSYINUvSBZfxqA/pancake $pth_shared
   fi
   sudo ln -nfs $pth_shared/.macports /opt
   sudo rsync -ia --no-group --no-owner --delete vault/. $pth_shared/vault/
-  sudo chown -R $nm_shared:staff $pth_shared # TODO
+  sudo chown -R $nm_shared:$FLAGS_groupid $pth_shared
 
   sudo su - $nm_shared -c "git pull"
   sudo su - $nm_shared -c "git submodule update --init --recursive"
 
-  sudo su - $nm_shared -c "bin/build macports"
-  sudo su - $nm_shared -c "source .bash_profile; bin/build ubuntu"
+  if [[ "$FLAGS_macports" = "$FLAGS_TRUE" ]]; then
+    sudo su - $nm_shared -c "bin/build macports"
+  fi
+
+  if [[ "$FLAGS_ubuntu" = "$FLAGS_TRUE" ]]; then
+    sudo su - $nm_shared -c "source .bash_profile; bin/build ubuntu"
+  fi
 }
 
 # define command line options:
 #   var name, default, description, short option
+DEFINE_bolean 'macports' "$FLAGS_TRUE" 'install macports packages' '-m'
+DEFINE_bolean 'ubuntu' "$FLAGS_TRUE" 'build ubuntu guests'
+DEFINE_integer 'userid' "502" 'user id' '-u'
+DEFINE_integer 'groupid' "20" 'group id' '-g'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
