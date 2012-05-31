@@ -61,8 +61,15 @@ function setup_pancake {
   if [[ ! -d $pth_shared/.git ]]; then
     sudo git clone --recurse-submodules https://github.com/HeSYINUvSBZfxqA/pancake $pth_shared
   fi
-  sudo ln -nfs $pth_shared/.macports /opt
-  sudo rsync -ia --no-group --no-owner --delete vault/. $pth_shared/vault/
+
+  if [[ "$FLAGS_macports" = "$FLAGS_TRUE" ]]; then
+    sudo ln -nfs $pth_shared/.macports /opt
+  fi
+
+  if [[ "$FLAGS_macports" = "$FLAGS_TRUE" || "$FLAGS_ubuntu" = "$FLAGS_TRUE" ]]; then
+    sudo rsync -ia --no-group --no-owner --delete vault/. $pth_shared/vault/
+  fi
+
   sudo chown -R $nm_shared:$FLAGS_groupid $pth_shared
 
   sudo su - $nm_shared -c "git pull"
@@ -79,10 +86,10 @@ function setup_pancake {
 
 # define command line options:
 #   var name, default, description, short option
-DEFINE_bolean 'macports' "$FLAGS_TRUE" 'install macports packages' '-m'
-DEFINE_bolean 'ubuntu' "$FLAGS_TRUE" 'build ubuntu guests'
-DEFINE_integer 'userid' "502" 'user id' '-u'
-DEFINE_integer 'groupid' "20" 'group id' '-g'
+DEFINE_boolean 'macports' "$FLAGS_TRUE" 'install macports packages' 'm'
+DEFINE_boolean 'ubuntu' "$FLAGS_TRUE" 'build ubuntu guests'
+DEFINE_integer 'userid' "502" 'user id' 'u'
+DEFINE_integer 'groupid' "20" 'group id' 'g'
 
 # parse the command-line
 parse_command_line "$@" || exit $?
