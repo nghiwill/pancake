@@ -1,6 +1,14 @@
-source /opt/.profile
-source ~/.ubuntu/.profile
-source ~/.rvm/scripts/rvm
-rvm ree
-source ~/.rbenv/.profile
+if [[ -f /opt/.profile ]]; then
+  source /opt/.profile
+fi
+
+if [[ -f ~/.ubuntu/.profile]]; then
+  source ~/.ubuntu/.profile
+fi
+
+if [[ -f ~/.rvm/scripts/rvm ]]; then
+  source ~/.rvm/scripts/rvm
+  rvm ree
+fi
+
 source ~/.bashrc
