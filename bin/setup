@@ -87,7 +87,7 @@ function setup_pancake {
 # define command line options:
 #   var name, default, description, short option
 DEFINE_boolean 'macports' "$FLAGS_TRUE" 'install macports packages' 'm'
-DEFINE_boolean 'ubuntu' "$FLAGS_TRUE" 'build ubuntu guests' 'U'
+DEFINE_boolean 'ubuntu' "$FLAGS_FALSE" 'build ubuntu guests' 'U'
 DEFINE_integer 'userid' "502" 'user id' 'u'
 DEFINE_integer 'groupid' "20" 'group id' 'g'
 DEFINE_string 'repo' "https://github.com/HeSYINUvSBZfxqA/pancake" 'home repo' 'r'
