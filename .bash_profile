@@ -2,7 +2,7 @@ if [[ -f /opt/.profile ]]; then
   source /opt/.profile
 fi
 
-if [[ -f ~/.ubuntu/.profile]]; then
+if [[ -f ~/.ubuntu/.profile ]]; then
   source ~/.ubuntu/.profile
 fi
 
