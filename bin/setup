@@ -76,6 +76,7 @@ function setup_pancake {
   sudo su - $nm_shared -c "git submodule update --init --recursive"
 
   if [[ "$FLAGS_macports" = "$FLAGS_TRUE" ]]; then
+    sudo xcode-'select' -switch /Applications/Xcode.app
     sudo su - $nm_shared -c "bin/build macports"
   fi
 
