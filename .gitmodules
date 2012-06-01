@@ -10,3 +10,6 @@
 [submodule ".junas"]
 	path = .junas
 	url = https://github.com/HeSYINUvSBZfxqA/junas
+[submodule ".hubflow"]
+	path = .hubflow
+	url = https://github.com/HeSYINUvSBZfxqA/hubflow
