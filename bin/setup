@@ -66,7 +66,7 @@ function setup_pancake {
     sudo ln -nfs $pth_shared/.macports /opt
   fi
 
-  if [[ "$FLAGS_macports" = "$FLAGS_TRUE" || "$FLAGS_ubuntu" = "$FLAGS_TRUE" ]]; then
+  if [[ "$FLAGS_macports" = "$FLAGS_TRUE" ]]; then
     sudo rsync -ia --no-group --no-owner --delete vault/. $pth_shared/vault/
   fi
 
@@ -77,18 +77,13 @@ function setup_pancake {
 
   if [[ "$FLAGS_macports" = "$FLAGS_TRUE" ]]; then
     sudo xcode-'select' -switch /Applications/Xcode.app
-    sudo su - $nm_shared -c "bin/build macports"
-  fi
-
-  if [[ "$FLAGS_ubuntu" = "$FLAGS_TRUE" ]]; then
-    sudo su - $nm_shared -c "source .bash_profile; bin/build ubuntu"
+    sudo su - $nm_shared -c "bin/build pancake"
   fi
 }
 
 # define command line options:
 #   var name, default, description, short option
 DEFINE_boolean 'macports' "$FLAGS_TRUE" 'install macports packages' 'm'
-DEFINE_boolean 'ubuntu' "$FLAGS_FALSE" 'build ubuntu guests' 'U'
 DEFINE_integer 'userid' "502" 'user id' 'u'
 DEFINE_integer 'groupid' "20" 'group id' 'g'
 DEFINE_string 'repo' "https://github.com/HeSYINUvSBZfxqA/pancake" 'home repo' 'r'
