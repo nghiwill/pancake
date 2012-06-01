@@ -3,6 +3,7 @@ if [[ -f /opt/.profile ]]; then
 fi
 
 source ~/.cue/.profile
+source ~/.hubflow/.profile
 
 if [[ -f ~/.rvm/scripts/rvm ]]; then
   source ~/.rvm/scripts/rvm
